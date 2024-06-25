@@ -80,7 +80,7 @@ http:
     bitrix:
       loadBalancer:
         servers:
-          - url: "http://localhost:80"
+          - url: "http://146.190.179.17:80"
 
     # noop:
     #   loadBalancer:
