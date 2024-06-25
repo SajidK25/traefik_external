@@ -3,6 +3,8 @@ entryPoints:
     address: ":80"
   websecure:
     address: ":443"
+  traefik:
+    address: ":8081"
 
 api:
   dashboard: true
@@ -16,27 +18,6 @@ log:
   level: DEBUG
 
 accessLog: {}
-
-# Enable the Traefik dashboard and API
-entryPoints:
-  traefik:
-    address: ":8081"
-
-http:
-  routers:
-    traefik:
-      rule: "Host(`proxy.orca.falktron.dev`)"
-      service: api@internal
-      entryPoints:
-        - "traefik"
-      middlewares:
-        - auth
-
-  middlewares:
-    auth:
-      basicAuth:
-        users:
-          - "admin:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"  # admin/admin (example)
 
 certificatesResolvers:
   letsencrypt:

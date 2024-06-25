@@ -25,6 +25,14 @@ http:
       tls:
         certResolver: letsencrypt
       service: bitrix
+    
+    traefik-dashboard:
+      rule: "Host(`proxy.orca.falktron.dev`)"
+      entryPoints:
+        - traefik
+      service: api@internal
+      middlewares:
+        - auth
 
   middlewares:
     redirect-to-https:
@@ -37,6 +45,11 @@ http:
         regex: "^https://www\\.(.*)"
         replacement: "https://$1"
         permanent: true
+    
+    auth:
+      basicAuth:
+        users:
+          - "admin:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"  # admin/admin (example)
 
   services:
     bitrix:
