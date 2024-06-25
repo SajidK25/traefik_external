@@ -57,8 +57,6 @@ http:
         servers:
           - url: "http://localhost:80"
 
-  # Define a noop service to handle redirects
-  services:
     noop:
       loadBalancer:
         servers:
