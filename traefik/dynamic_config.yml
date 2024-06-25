@@ -27,8 +27,8 @@ http:
         options:
           default:
             minVersion: VersionTLS12
-            mintls13:
-              minVersion: VersionTLS13
+          mintls13:
+            minVersion: VersionTLS13
       service: bitrix
     
     traefik-dashboard:
