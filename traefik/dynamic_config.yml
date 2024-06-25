@@ -19,7 +19,7 @@ http:
     bitrix-router:
       rule: "Host(`orca.falktron.dev`)"
       entryPoints:
-        - websecure
+        - web
       middlewares:
         - auth
       # tls:
