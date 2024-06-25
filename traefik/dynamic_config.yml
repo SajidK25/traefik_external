@@ -25,7 +25,7 @@ http:
     #   service: noop
 
     bitrix-router:
-      rule: "Host(`orca.falktron.dev`)"
+      rule: "Host(`t99ltd.info`)"
       entryPoints:
         - websecure
       middlewares:
@@ -34,19 +34,19 @@ http:
       tls:
         certResolver: letsencrypt
         options: modern
-    api:
-      rule: Host(`traefik.DOMAIN.net`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - Auth
-      service: api@internal
-      tls:
-        certResolver: letsencrypt
-        options: modern
+    # api:
+    #   rule: Host(`traefik.DOMAIN.net`)
+    #   entrypoints:
+    #     - websecure
+    #   middlewares:
+    #     - Auth
+    #   service: api@internal
+    #   tls:
+    #     certResolver: letsencrypt
+    #     options: modern
 
     traefik-dashboard:
-      rule: "Host(`proxy.orca.falktron.dev`)"
+      rule: "Host(`traefik.t99ltd.info`)"
       # entryPoints:
       #   - websecure
       service: traefik
