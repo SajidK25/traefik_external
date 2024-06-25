@@ -24,8 +24,11 @@ http:
         - auth
       tls:
         certResolver: letsencrypt
-        minVersion: "VersionTLS13"                          # Minimum TLS Version
-        sniStrict: true
+        options:
+          default:
+            minVersion: VersionTLS12
+            mintls13:
+              minVersion: VersionTLS13
       service: bitrix
     
     traefik-dashboard:
