@@ -1,20 +1,20 @@
 http:
   routers:
-    http-to-https:
-      rule: "HostRegexp(`{host:.+}`)"
-      entryPoints:
-        - web
-      middlewares:
-        - redirect-to-https
-      service: noop
+    # http-to-https:
+    #   rule: "HostRegexp(`{host:.+}`)"
+    #   entryPoints:
+    #     - web
+    #   middlewares:
+    #     - redirect-to-https
+    #   service: noop
 
-    www-to-non-www:
-      rule: "Host(`www.orca.falktron.dev`)"
-      entryPoints:
-        - websecure
-      middlewares:
-        - redirect-to-non-www
-      service: noop
+    # www-to-non-www:
+    #   rule: "Host(`www.orca.falktron.dev`)"
+    #   entryPoints:
+    #     - websecure
+    #   middlewares:
+    #     - redirect-to-non-www
+    #   service: noop
 
     bitrix-router:
       rule: "Host(`orca.falktron.dev`)"
