@@ -12,9 +12,9 @@ entryPoints:
       tls:
         certResolver: letsencrypt
         domains:
-          - main: "orca.falktron.dev"
+          - main: "t99ltd.info"
             sans:
-              - "*.orca.falktron.dev"
+              - "*.t99ltd.info"
   # traefik:
   #   address: ":8081"
 
