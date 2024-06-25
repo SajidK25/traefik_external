@@ -11,7 +11,7 @@ api:
 
 providers:
   file:
-    filename: "/etc/traefik/config.yml"
+    filename: "/etc/traefik/dynamic_config.yml"
     watch: true
 
 log:

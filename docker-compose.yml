@@ -10,6 +10,6 @@ services:
       - "8081:8081"  # For Traefik dashboard
     volumes:
       - "./traefik/traefik.yml:/etc/traefik/traefik.yml"
-      - "./traefik/dynamic_config.yml:/etc/traefik/config.yml:ro"
+      - "./traefik/dynamic_config.yml:/etc/traefik/dynamic_config.yml:ro"
       - "./letsencrypt/cert:/etc/traefik/acme"
     restart: unless-stopped

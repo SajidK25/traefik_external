@@ -35,16 +35,16 @@ http:
         - auth
 
   middlewares:
-    redirect-to-https:
-      redirectScheme:
-        scheme: https
-        permanent: true
+    # redirect-to-https:
+    #   redirectScheme:
+    #     scheme: https
+    #     permanent: true
 
-    redirect-to-non-www:
-      redirectRegex:
-        regex: "^https://www\\.(.*)"
-        replacement: "https://$1"
-        permanent: true
+    # redirect-to-non-www:
+    #   redirectRegex:
+    #     regex: "^https://www\\.(.*)"
+    #     replacement: "https://$1"
+    #     permanent: true
     
     auth:
       basicAuth:
