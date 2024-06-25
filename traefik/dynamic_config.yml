@@ -22,9 +22,9 @@ http:
         - websecure
       middlewares:
         - auth
-      tls:
-        certResolver: letsencrypt
-        options: default
+      # tls:
+      #   certResolver: letsencrypt
+      #   options: default
       service: bitrix
     
     traefik-dashboard:
@@ -58,7 +58,7 @@ http:
         servers:
           - url: "http://localhost:80"
 
-    noop:
-      loadBalancer:
-        servers:
-          - url: "http://localhost"
+    # noop:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://localhost"
