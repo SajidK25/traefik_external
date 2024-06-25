@@ -1,13 +1,26 @@
 entryPoints:
   web:
     address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
   websecure:
     address: ":443"
-  traefik:
-    address: ":8081"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "orca.falktron.dev"
+            sans:
+              - "*.orca.falktron.dev"
+  # traefik:
+  #   address: ":8081"
 
 api:
   dashboard: true
+  insecure: false
 
 providers:
   file:
@@ -24,6 +37,7 @@ certificatesResolvers:
     acme:
       email: m.mut@falktron.de
       storage: /etc/traefik/acme/acme.json
+      keyType: EC384
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
       tlsChallenge: {}
       # httpChallenge:

@@ -1,3 +1,11 @@
+tls:
+  options:
+    modern:
+      minVersion: VersionTLS12
+      curvePreferences:
+        - CurveP521
+        - CurveP384
+
 http:
   routers:
     # http-to-https:
@@ -19,19 +27,32 @@ http:
     bitrix-router:
       rule: "Host(`orca.falktron.dev`)"
       entryPoints:
-        - web
+        - websecure
       middlewares:
         - auth
-      # tls:
-      #   certResolver: letsencrypt
-      #   options: default
       service: bitrix
-    
+      tls:
+        certResolver: letsencrypt
+        options: modern
+    api:
+      rule: Host(`traefik.DOMAIN.net`)
+      entrypoints:
+        - websecure
+      middlewares:
+        - Auth
+      service: api@internal
+      tls:
+        certResolver: letsencrypt
+        options: modern
+
     traefik-dashboard:
       rule: "Host(`proxy.orca.falktron.dev`)"
-      entryPoints:
-        - traefik
-      service: api@internal
+      # entryPoints:
+      #   - websecure
+      service: traefik
+      tls:
+        certResolver: letsencrypt
+        options: modern
       middlewares:
         - auth
 
@@ -51,8 +72,11 @@ http:
       basicAuth:
         users:
           - "admin:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"  # admin/admin (example)
-
   services:
+    traefik:
+      loadBalancer:
+        servers:
+          - url: http://localhost:8080/
     bitrix:
       loadBalancer:
         servers:
