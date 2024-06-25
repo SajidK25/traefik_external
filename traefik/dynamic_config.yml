@@ -1,0 +1,52 @@
+http:
+  routers:
+    http-to-https:
+      rule: "HostRegexp(`{host:.+}`)"
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+      service: noop
+
+    www-to-non-www:
+      rule: "Host(`www.orca.falktron.dev`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - redirect-to-non-www
+      service: noop
+
+    bitrix-router:
+      rule: "Host(`orca.falktron.dev`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - auth
+      tls:
+        certResolver: letsencrypt
+      service: bitrix
+
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    redirect-to-non-www:
+      redirectRegex:
+        regex: "^https://www\\.(.*)"
+        replacement: "https://$1"
+        permanent: true
+
+  services:
+    bitrix:
+      loadBalancer:
+        servers:
+          - url: "http://localhost:80"
+
+  # Define a noop service to handle redirects
+  services:
+    noop:
+      loadBalancer:
+        servers:
+          - url: "http://localhost"
